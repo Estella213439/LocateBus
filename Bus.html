@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <title>BusLocate</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      #map {
+        position: absolute;
+        top: 30px;
+        bottom: 0;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <!--<button onclick="getLocation()">Show My Location</button>-->
+    <div id='map'></div>
+    <pre id='info'></pre>
+    <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZXN0ZWxsYTIxMzQzOSIsImEiOiJjanJ1eTRndHgzMDY2M3lsYXMwaHVqNGVuIn0.-NQ2jPS_wCAxQ2bCVbsabA'; // replace this with your access token
+    var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/estella213439/cjtbvwf702i661foemqjp5wwf', // replace this with your style URL
+      center: [-73.5772, 45.5048],
+      zoom: 10.7
+    });
+
+    map.addControl(new mapboxgl.GeolocateControl({
+      positionOptions: {
+        enableHighAccuracy: true
+      },
+      trackUserLocation: true
+    }
+    ));
+
+	var a = null;
+	var b = null;
+    map.on('click', function (e) {
+        a = (e.lngLat.lng);
+		b = (e.lngLat.lat);
+		document.getElementById('info').innerHTML = b
+        // e.point is the x, y coordinates of the mousemove event relative
+        // to the top-left corner of the map
+        //JSON.stringify(e.point) + '<br />' +
+        // e.lngLat is the longitude, latitude geographical position of the event
+        //JSON.stringify(e.lngLat.lng);
+		
+   });
+
+
+
+    </script>
+  </body>
+</html>
